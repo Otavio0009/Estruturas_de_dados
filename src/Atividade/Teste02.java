@@ -1,4 +1,4 @@
-package Aula_02.Atividade;
+package Atividade;
 
 public class Teste02 {
     public static void main(String[] args) {

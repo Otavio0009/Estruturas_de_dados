@@ -1,6 +1,4 @@
-package Aula_02.Atividade;
-
-import java.util.Arrays;
+package Atividade;
 
 public class Vetor {
     private String[] elementos;
