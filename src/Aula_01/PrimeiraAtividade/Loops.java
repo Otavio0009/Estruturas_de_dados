@@ -1,4 +1,4 @@
-package PrimeiraAtividade;
+package Aula_01.PrimeiraAtividade;
 
 public class Loops {
     public static void main(String[] args) {
