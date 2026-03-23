@@ -1,4 +1,4 @@
-package Atividade;
+package Vetor.Atividade;
 
 public class Teste05 {
     public static void main(String[] args) {

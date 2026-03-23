@@ -1,4 +1,4 @@
-package Aula_01.PrimeiraAtividade;
+package Vetor.Aula_01.PrimeiraAtividade;
 
 public class OlaJava  {
     public static void main(String[] args) {

@@ -1,6 +1,4 @@
-package Aula_02.Exemplos;
-
-import java.util.Arrays;
+package Vetor.Atividade;
 
 public class Vetor {
     private String[] elementos;
@@ -30,7 +28,7 @@ public class Vetor {
 
     public boolean contem(String elemento) {
         for (int i = 0; i < this.tamanho; i++) {
-            // .equals evita erros de comparação de memória
+
             if (this.elementos[i].equals(elemento)) {
                 return true;
             }
@@ -51,7 +49,6 @@ public class Vetor {
         return this.tamanho;
     }
 
-    // CORREÇÃO: Lançar erro apenas se a posição for INVÁLIDA
     public String buscar(int posicao) {
         if (!(posicao >= 0 && posicao < this.tamanho)) {
             throw new IllegalArgumentException("Posição inválida");
@@ -59,7 +56,6 @@ public class Vetor {
         return this.elementos[posicao];
     }
 
-    // CORREÇÃO: Tratamento para não dar erro quando o vetor estiver vazio
     @Override
     public String toString() {
         if (this.tamanho == 0) {
@@ -77,5 +73,34 @@ public class Vetor {
         conteudo.append(this.elementos[this.tamanho - 1]);
         conteudo.append("]");
         return conteudo.toString();
+    }
+
+    public void limpar() {
+        for (int i = 0; i < this.tamanho; i++) {
+            this.elementos[i] = null;
+        }
+        this.tamanho = 0;
+    }
+
+    public int contarOcorrencias(String elemento) {
+        int contador = 0;
+
+        for (int i = 0; i < this.tamanho; i++) {
+            if (this.elementos[i] == elemento) {
+                contador++;
+            }
+        }
+        return contador;
+    }
+
+    public boolean substituir(String antigo, String novo){
+        for(int i = 0; i < this.tamanho; i++){
+            if (this.elementos[i] == antigo && antigo != novo){
+
+                this.elementos[i] = novo;
+                return true;
+            }
+        }
+        return false;
     }
 }

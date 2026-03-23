@@ -1,4 +1,4 @@
-package Aula_02;
+package Vetor.Aula_02;
 
 public class Aula02 {
     public static void main(String[] args) {

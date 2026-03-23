@@ -1,12 +1,13 @@
-package Aula_03;
+package Pilha;
+
 import java.util.Arrays;
 
-public class Vetor {
-    private String[] elementos;
+public class Pilha {
+    private Object[] elementos;
     private int tamanho;
 
-    public Vetor(int capacidade) {
-        this.elementos = new String[capacidade];
+    public Pilha(int capacidade) {
+        this.elementos = new Object[capacidade];
         this.tamanho = 0;
     }
 
@@ -14,9 +15,10 @@ public class Vetor {
         return tamanho == 0;
     }
 
-    public String ultimo() {
+    // Alterado para Object, pois a pilha guarda qualquer objeto
+    public Object topo() {
         if (this.estaVazia()) {
-            throw new IllegalStateException("O vetor está vazio");
+            throw new IllegalStateException("A pilha está vazia");
         }
         return this.elementos[this.tamanho - 1];
     }
@@ -27,9 +29,8 @@ public class Vetor {
         }
     }
 
-    public boolean contem(String elemento) {
+    public boolean contem(Object elemento) {
         for (int i = 0; i < this.tamanho; i++) {
-            // .equals evita erros de comparação de memória
             if (this.elementos[i].equals(elemento)) {
                 return true;
             }
@@ -37,32 +38,37 @@ public class Vetor {
         return false;
     }
 
-    public boolean adicionar(String elemento) {
+    public boolean empilhar(Object elemento) {
         this.aumentaCapacidade();
-
         if (this.tamanho < this.elementos.length) {
             this.elementos[this.tamanho] = elemento;
             this.tamanho++;
             return true;
-
         }
         return false;
+    }
+
+    public Object desempilhar() {
+        if (this.estaVazia()) {
+            return null;
+        }
+        Object elementoRemovido = this.elementos[tamanho - 1];
+        this.elementos[tamanho - 1] = null; // Boa prática para o Garbage Collector
+        this.tamanho--;
+        return elementoRemovido;
     }
 
     public int tamanho() {
         return this.tamanho;
     }
 
-    // CORREÇÃO: Lançar erro apenas se a posição for INVÁLIDA
-    public String buscar(int posicao) {
+    public Object buscar(int posicao) {
         if (!(posicao >= 0 && posicao < this.tamanho)) {
             throw new IllegalArgumentException("Posição inválida");
         }
         return this.elementos[posicao];
     }
 
-    // CORREÇÃO: Tratamento para não dar erro quando o vetor estiver vazio
-    //Sobrescrita
     @Override
     public String toString() {
         if (this.tamanho == 0) {
@@ -82,37 +88,13 @@ public class Vetor {
         return conteudo.toString();
     }
 
-    public int busca(String elemento) {
-        for (int i = 0; i < this.tamanho; i++) {
-            if (this.elementos[i].equals(elemento)) {
-                return i;
-            }
-        }
-        return -1;
-    }
-
-    public void adicionar(int posicao, String elemento) {
-        if (!(posicao >= 0 && posicao < this.tamanho)) {
-            throw new IllegalArgumentException("Posição inválida");
-        }
-
-        this.aumentaCapacidade();
-
-        for (int i = tamanho -1; i >= posicao; i--) {
-            this.elementos[i+1] = this.elementos[i];
-        }
-
-        this.elementos[posicao] = elemento;
-        this.tamanho++;
-    }
-
     private void aumentaCapacidade() {
         if (this.tamanho == this.elementos.length) {
-            String[] novoElementos = new String[this.elementos.length * 2];
+            // CORREÇÃO: O novo array deve ser de Object, não String
+            Object[] novoElementos = new Object[this.elementos.length * 2];
             for (int i = 0; i < this.tamanho; i++) {
                 novoElementos[i] = this.elementos[i];
             }
-
             this.elementos = novoElementos;
         }
     }
@@ -122,8 +104,8 @@ public class Vetor {
             throw new IllegalArgumentException("Posição inválida");
         }
 
-        for (int i = posicao + 1; i < this.tamanho; i++) {
-            this.elementos[i+1] = this.elementos[i];
+        for (int i = posicao; i < this.tamanho - 1; i++) {
+            this.elementos[i] = this.elementos[i+1];
         }
 
         this.elementos[tamanho - 1] = null;
