@@ -174,9 +174,9 @@ public class ListaEncadeadas<T> {
         return removido;
     }
 
-    public T remover(int posicao) throws IllegalAccessException {
+    public T remover(int posicao) {
         if (posicao < 0 || posicao > this.tamanho) {
-            throw new IllegalAccessException("Posição inválida");
+            throw new IllegalArgumentException("Posição inválida");
         }
 
         if  (posicao == 0) {
